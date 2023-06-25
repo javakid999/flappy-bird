@@ -103,6 +103,7 @@ export class ShopScene extends Scene {
                     } else {
                         if (this.canvas.coins >= this.costs[i]) {
                             this.canvas.purchasedBirds[i] = 1
+                            this.canvas.coins -= this.costs[i]
                             this.objects[this.canvas.selectedBird*2].image = this.birds[15]
                             this.canvas.selectedBird = i
                             this.objects[i*2].image = this.birds[16]
@@ -110,6 +111,8 @@ export class ShopScene extends Scene {
                             this.objects[this.canvas.selectedBird*2+1].size = [50,35]
                             this.objects[this.canvas.selectedBird*2+1].position[0] -= 5
                             this.objects[this.canvas.selectedBird*2+1].position[1] += 2
+                            document.getElementById('coins')!.textContent = "Coins: " + this.canvas.coins
+                            this.canvas.save()
                         }
                     }
                 }

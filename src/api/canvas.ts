@@ -40,10 +40,14 @@ export class Canvas {
         this.globalObjects = []
     }
 
+    reset() {
+        localStorage.clear()
+    }
+
     save() {
         localStorage.setItem("coins", this.coins.toString());
         localStorage.setItem("selectedBird", this.selectedBird.toString());
-        localStorage.setItem("purchasedbirds", JSON.stringify(this.purchasedBirds));
+        localStorage.setItem("purchasedBirds", JSON.stringify(this.purchasedBirds));
     }
 
     load() {

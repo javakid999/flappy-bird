@@ -1,4 +1,5 @@
 import { Canvas } from "../api/canvas";
+import { Easing } from "../api/easing";
 import { InputManager } from "../api/inputmanager";
 import { GameObject, ScrollingBackground } from "../api/object";
 import { Scene } from "../api/scene";
@@ -54,7 +55,7 @@ export class GameScene extends Scene {
 
         this.objects = []
         this.pipes = []
-        this.objects.push(new ScrollingBackground([0,400], [64*6, 200], -0.01, assets['mountains']))
+        this.objects.push(new ScrollingBackground([0,400], [64*6, 200], -0.02, assets['mountains']))
         this.objects.push(new ScrollingBackground([0,450], [48*6, 150], -0.03, assets['city']))
         this.objects.push(new ScrollingBackground([0,472], [65*6, 128], -0.1, assets['grass']))
         this.assets = assets
@@ -75,7 +76,7 @@ export class GameScene extends Scene {
     activate() {
         this.coinCounter.style.display = 'block'
         this.scoreCounter.style.display = 'block'
-        
+        this.timeActive = 0
         const birds = [
             this.canvas.assets['bird-green'], this.canvas.assets['bird-red'], this.canvas.assets['bird-blue'], this.canvas.assets['bird-yellow'], this.canvas.assets['bird-purple'],
             this.canvas.assets['bird-checker'], this.canvas.assets['bird-robot'], this.canvas.assets['bird-totem'], this.canvas.assets['bird-rainbow1'], this.canvas.assets['bird-rainbow2'],
@@ -92,13 +93,12 @@ export class GameScene extends Scene {
         this.pipes = []
         this.player = new Player(this.player.sprite.image, [400,300])
         this.score = 0
-        this.timeActive = 0
         this.scoreCounter.textContent = "Score: " + this.score
     }
 
     render(canvas: Canvas) {
         this.objects.forEach((object) => {
-            object.render(canvas.ctx, Math.floor(this.timeActive/6))
+            object.render(canvas.ctx, Math.floor(this.timeActive/20))
         })
         this.pipes.forEach((pipe) => {
             if (pipe.scoreTrigger.triggered) {
@@ -122,6 +122,11 @@ export class GameScene extends Scene {
     update(deltaTime: number) {
         super.update(deltaTime)
         this.player.update(deltaTime, this.timeActive)
+
+        this.objects[0].position[1] = Easing.cosine(600,400,Math.min(this.timeActive/2000,1))
+        this.objects[1].position[1] = Easing.cosine(600,450,Math.min(this.timeActive/2000,1))
+        this.objects[2].position[1] = Easing.cosine(600,472,Math.min(this.timeActive/2000,1))
+        
         this.objects.forEach((object) => {
             if (this.player.alive) object.update(deltaTime)
         })

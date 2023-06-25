@@ -1,9 +1,11 @@
-import { GameObject } from "../api/object";
+import { Easing } from "../api/easing";
+import { GameObject, GameObjectAnimated } from "../api/object";
 import { ParticleSystem } from "../api/particle";
 
 export class MedalTable {
     board: GameObject
     medals: { [index: string]: GameObject }
+    shine: GameObjectAnimated
     particles: { [index: string]: ParticleSystem }
     medalTime: number
 
@@ -26,50 +28,81 @@ export class MedalTable {
             emerald: new ParticleSystem([272+12+18+20*4,96+30], [10,10], 40, [-0.2,0.2, -0.4,0, -0.01, 0.01], '#30ff30'),
             ruby: new ParticleSystem([272+12+18+40*4,96+30], [10,10], 40, [-0.2,0.2, -0.4,0, -0.01, 0.01], 'red')
         }
+        this.shine = new GameObjectAnimated([300,300], [18*4,18*4], 0, assets['shine'], [18,18])
     }
 
     render(ctx: CanvasRenderingContext2D, score: number) {
-        const smoothstep = (a: number, b: number, x: number) => {return (1 - (1-Math.cos(x*Math.PI))/2) * a + (1-Math.cos(x*Math.PI))/2 * b}
-        const quadratic = (a: number, b: number, x: number) => {return (b-a)*(x*x)+a}
         this.board.render(ctx)
         for (let particle in this.particles) {this.particles[particle].render(ctx)}
         if (this.medalTime > 2000 && score >= 10) {
             this.medals['bronze'].render(ctx)
-            this.medals['bronze'].angle = quadratic(1, 0, Math.min((this.medalTime-2000)/500,1))
-            this.medals['bronze'].size = [quadratic(18*6, 18*4, Math.min((this.medalTime-2000)/500,1)), quadratic(18*6, 18*4, Math.min((this.medalTime-2000)/500,1))]
-            this.medals['bronze'].position = [quadratic(284-18, 272+12, Math.min((this.medalTime-2000)/500,1)), quadratic(96-18, 96, Math.min((this.medalTime-2000)/500,1))]
+            this.medals['bronze'].angle = Easing.quadratic(1, 0, Math.min((this.medalTime-2000)/500,1))
+            this.medals['bronze'].size = [Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-2000)/500,1)), Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-2000)/500,1))]
+            this.medals['bronze'].position = [Easing.quadratic(284-18, 272+12, Math.min((this.medalTime-2000)/500,1)), Easing.quadratic(96-18, 96, Math.min((this.medalTime-2000)/500,1))]
         }
         if (this.medalTime > 3000 && score >= 20) {
             this.medals['silver'].render(ctx)
-            this.medals['silver'].angle = quadratic(1, 0, Math.min((this.medalTime-3000)/500,1))
-            this.medals['silver'].size = [quadratic(18*6, 18*4, Math.min((this.medalTime-3000)/500,1)), quadratic(18*6, 18*4, Math.min((this.medalTime-3000)/500,1))]
-            this.medals['silver'].position = [quadratic(284-18+20*4, 284+20*4, Math.min((this.medalTime-3000)/500,1)), quadratic(96-18, 96, Math.min((this.medalTime-3000)/500,1))]
+            this.medals['silver'].angle = Easing.quadratic(1, 0, Math.min((this.medalTime-3000)/500,1))
+            this.medals['silver'].size = [Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-3000)/500,1)), Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-3000)/500,1))]
+            this.medals['silver'].position = [Easing.quadratic(284-18+20*4, 284+20*4, Math.min((this.medalTime-3000)/500,1)), Easing.quadratic(96-18, 96, Math.min((this.medalTime-3000)/500,1))]
         }
         if (this.medalTime > 4000 && score >= 30) {
             this.medals['gold'].render(ctx)
-            this.medals['gold'].angle = quadratic(1, 0, Math.min((this.medalTime-4000)/500,1))
-            this.medals['gold'].size = [quadratic(18*6, 18*4, Math.min((this.medalTime-4000)/500,1)), quadratic(18*6, 18*4, Math.min((this.medalTime-4000)/500,1))]
-            this.medals['gold'].position = [quadratic(284-18+40*4, 284+40*4, Math.min((this.medalTime-4000)/500,1)), quadratic(96-18, 96, Math.min((this.medalTime-4000)/500,1))]
+            this.medals['gold'].angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-4000)/500,1))
+            this.medals['gold'].size =     [Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-4000)/500,1)), Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-4000)/500,1))]
+            this.medals['gold'].position = [Easing.quadratic(284-18+40*4, 284+40*4, Math.min((this.medalTime-4000)/500,1)), Easing.quadratic(96-18, 96, Math.min((this.medalTime-4000)/500,1))]
         }
         if (this.medalTime > 5000 && score >= 50) {
             this.medals['diamond'].render(ctx)
-            this.medals['diamond'].angle = quadratic(1, 0, Math.min((this.medalTime-5000)/250,1))
-            this.medals['diamond'].size = [quadratic(18*8, 18*6, Math.min((this.medalTime-5000)/250,1)), quadratic(18*8, 18*6, Math.min((this.medalTime-5000)/250,1))]
-            this.medals['diamond'].position = [quadratic(272-36+12, 272-18+12, Math.min((this.medalTime-5000)/250,1)), quadratic(96-36, 96-18, Math.min((this.medalTime-5000)/250,1))]
+            this.medals['diamond'].angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-5000)/250,1))
+            this.medals['diamond'].size =     [Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-5000)/250,1)), Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-5000)/250,1))]
+            this.medals['diamond'].position = [Easing.quadratic(272-36+12, 272-18+12, Math.min((this.medalTime-5000)/250,1)), Easing.quadratic(96-36, 96-18, Math.min((this.medalTime-5000)/250,1))]
         }
         if (this.medalTime > 5500 && score >= 75) {
             this.medals['emerald'].render(ctx)
-            this.medals['emerald'].angle = quadratic(1, 0, Math.min((this.medalTime-5500)/250,1))
-            this.medals['emerald'].size = [quadratic(18*8, 18*6, Math.min((this.medalTime-5500)/250,1)), quadratic(18*8, 18*6, Math.min((this.medalTime-5500)/250,1))]
-            this.medals['emerald'].position = [quadratic(272-36+12+20*4, 272-18+12+20*4, Math.min((this.medalTime-5500)/250,1)), quadratic(96-36, 96-18, Math.min((this.medalTime-5500)/250,1))]
+            this.medals['emerald'].angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-5500)/250,1))
+            this.medals['emerald'].size =     [Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-5500)/250,1)), Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-5500)/250,1))]
+            this.medals['emerald'].position = [Easing.quadratic(272-36+12+20*4, 272-18+12+20*4, Math.min((this.medalTime-5500)/250,1)), Easing.quadratic(96-36, 96-18, Math.min((this.medalTime-5500)/250,1))]
         }
         if (this.medalTime > 6000 && score >= 100) {
             this.medals['ruby'].render(ctx)
-            this.medals['ruby'].angle = quadratic(1, 0, Math.min((this.medalTime-6000)/250,1))
-            this.medals['ruby'].size = [quadratic(18*8, 18*6, Math.min((this.medalTime-6000)/250,1)), quadratic(18*8, 18*6, Math.min((this.medalTime-6000)/250,1))]
-            this.medals['ruby'].position = [quadratic(272-36+12+40*4, 272-18+12+40*4, Math.min((this.medalTime-6000)/250,1)), quadratic(96-36, 96-18, Math.min((this.medalTime-6000)/250,1))]
+            this.medals['ruby'].angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-6000)/250,1))
+            this.medals['ruby'].size =     [Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-6000)/250,1)), Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-6000)/250,1))]
+            this.medals['ruby'].position = [Easing.quadratic(272-36+12+40*4, 272-18+12+40*4, Math.min((this.medalTime-6000)/250,1)), Easing.quadratic(96-36, 96-18, Math.min((this.medalTime-6000)/250,1))]
         }
-        this.board.position[1] = smoothstep(-192, 0, Math.min(this.medalTime/1500,1))
+        this.board.position[1] = Easing.cosine(-192, 0, Math.min(this.medalTime/1500,1))
+
+        if (score >= 10 && score < 20 && this.medalTime > 2000) {
+            this.shine.render(ctx, Math.floor(this.medalTime/20))
+            this.shine.angle =     Easing.quadratic(1, 0, Math.min((this.medalTime-2000)/500,1))
+            this.shine.size =     [Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-2000)/500,1)), Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-2000)/500,1))]
+            this.shine.position = [Easing.quadratic(284-18, 272+12, Math.min((this.medalTime-2000)/500,1)), Easing.quadratic(96-18, 96, Math.min((this.medalTime-2000)/500,1))]
+        } else if (score >= 20 && score < 30 && this.medalTime > 3000) {
+            this.shine.render(ctx, Math.floor(this.medalTime/20))
+            this.shine.angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-3000)/500,1))
+            this.shine.size =     [Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-3000)/500,1)), Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-3000)/500,1))]
+            this.shine.position = [Easing.quadratic(284-18+20*4, 284+20*4, Math.min((this.medalTime-3000)/500,1)), Easing.quadratic(96-18, 96, Math.min((this.medalTime-3000)/500,1))]
+        } else if (score >= 30 && score < 50 && this.medalTime > 4000) {
+            this.shine.render(ctx, Math.floor(this.medalTime/20))
+            this.shine.angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-4000)/500,1))
+            this.shine.size =     [Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-4000)/500,1)), Easing.quadratic(18*6, 18*4, Math.min((this.medalTime-4000)/500,1))]
+            this.shine.position = [Easing.quadratic(284-18+40*4, 284+40*4, Math.min((this.medalTime-4000)/500,1)), Easing.quadratic(96-18, 96, Math.min((this.medalTime-4000)/500,1))]
+        } else if (score >= 50 && score < 75 && this.medalTime > 5000) {
+            this.shine.render(ctx, Math.floor(this.medalTime/20))
+            this.shine.angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-5000)/250,1))
+            this.shine.size =     [Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-5000)/250,1)), Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-5000)/250,1))]
+            this.shine.position = [Easing.quadratic(272-36+12, 272-18+12, Math.min((this.medalTime-5000)/250,1)), Easing.quadratic(96-36, 96-18, Math.min((this.medalTime-5000)/250,1))]
+        } else if (score >= 75 && score < 100 && this.medalTime > 5500) {
+            this.shine.render(ctx, Math.floor(this.medalTime/20))
+            this.shine.angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-5500)/250,1))
+            this.shine.size =     [Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-5500)/250,1)), Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-5500)/250,1))]
+            this.shine.position = [Easing.quadratic(272-36+12+20*4, 272-18+12+20*4, Math.min((this.medalTime-5500)/250,1)), Easing.quadratic(96-36, 96-18, Math.min((this.medalTime-5500)/250,1))]
+        } else if (score >= 100 && this.medalTime > 6000) {
+            this.shine.render(ctx, Math.floor(this.medalTime/20))
+            this.shine.angle =    Easing.quadratic(1, 0, Math.min((this.medalTime-6000)/250,1))
+            this.shine.size =     [Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-6000)/250,1)), Easing.quadratic(18*8, 18*6, Math.min((this.medalTime-6000)/250,1))]
+            this.shine.position = [Easing.quadratic(272-36+12+40*4, 272-18+12+40*4, Math.min((this.medalTime-6000)/250,1)), Easing.quadratic(96-36, 96-18, Math.min((this.medalTime-6000)/250,1))]
+        }
     }
 
     update(deltaTime: number, score: number) {

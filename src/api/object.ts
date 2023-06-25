@@ -38,9 +38,7 @@ export class GameObjectAnimated extends GameObject {
         ctx.rotate(this.angle);
         const numImagesHoriz = this.image.width/this.imageSize[0]
         const numImagesVert = this.image.height/this.imageSize[1]
-        //dontworkrn
-        console.log((frame%numImagesHoriz)*this.imageSize[0], (Math.floor(frame/numImagesVert)%numImagesVert)*this.imageSize[1])
-        ctx.drawImage(this.image, this.size[0]/-2, this.size[1]/-2, this.size[0], this.size[1], (frame%numImagesHoriz)*this.imageSize[0]-this.size[0]/2, (Math.floor(frame/numImagesVert)%numImagesVert)*this.imageSize[1]-this.size[1]/2, this.imageSize[0], this.imageSize[1]);
+        ctx.drawImage(this.image, (frame%numImagesHoriz)*this.imageSize[0], (Math.floor(frame/numImagesVert)%numImagesVert)*this.imageSize[1], this.imageSize[0], this.imageSize[1], this.size[0]/-2, this.size[1]/-2, this.size[0], this.size[1]);
         ctx.restore();
     }
 
