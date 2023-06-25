@@ -1,0 +1,50 @@
+canvas {
+    border: solid 3px black;
+    image-rendering: pixelated;
+}
+
+#score {
+    top: 5%
+}
+
+#coins {
+    top: 1%
+}
+
+#screen {
+    width: 800px;
+    height: 600px;
+}
+
+#return {
+    top: -20%
+}
+
+body {
+    font-size: 20px;
+    font-family: Arial;
+}
+
+.ui-button {
+    color: black;
+    background-color: rgba(0,255,255,0.5);
+    position: relative;
+    top: -50%;
+    font-size: 20px;
+    font-family: Arial;
+    padding: 20px;
+    left: 25%;
+    width: 50%;
+    display: none;
+    border: none;
+}
+
+.ui-button:hover {background-color: rgba(0,255,255,0.75);}
+
+.ui-text {
+    padding: 10px;
+    position: absolute;
+    color: white;
+    text-shadow: 0 0 5px #000000;
+    user-select: none;
+}

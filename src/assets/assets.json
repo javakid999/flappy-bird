@@ -1,0 +1,36 @@
+[
+  {"name" : "bird-green", "link" : "./src/assets/birds/green.png"},
+  {"name" : "bird-red", "link" : "./src/assets/birds/red.png"},
+  {"name" : "bird-blue", "link" : "./src/assets/birds/blue.png"},
+  {"name" : "bird-yellow", "link" : "./src/assets/birds/yellow.png"},
+  {"name" : "bird-purple", "link" : "./src/assets/birds/purple.png"},
+  
+  {"name" : "bird-checker", "link" : "./src/assets/birds/checker.png"},
+  {"name" : "bird-robot", "link" : "./src/assets/birds/robot.png"},
+  {"name" : "bird-totem", "link" : "./src/assets/birds/totem.png"},
+  {"name" : "bird-rainbow1", "link" : "./src/assets/birds/rainbow1.png"},
+  {"name" : "bird-rainbow2", "link" : "./src/assets/birds/rainbow2.png"},
+  
+  {"name" : "bird-rainbow3", "link" : "./src/assets/birds/rainbow3.png"},
+  {"name" : "bird-gold", "link" : "./src/assets/birds/gold.png"},
+  {"name" : "bird-diamond", "link" : "./src/assets/birds/diamond.png"},
+  {"name" : "bird-emerald", "link" : "./src/assets/birds/emerald.png"},
+  {"name" : "bird-ruby", "link" : "./src/assets/birds/ruby.png"},
+
+  {"name" : "city", "link" : "./src/assets/city.png"},
+  {"name" : "mountains", "link" : "./src/assets/mountains.png"},
+  {"name" : "medals", "link" : "./src/assets/medals.png"},
+  {"name" : "grass", "link" : "./src/assets/grass.png"},
+  {"name" : "shine", "link": "./src/assets/shine_spritesheet.png"},
+  {"name" : "bronze", "link": "./src/assets/bronze.png"},
+  {"name" : "silver", "link": "./src/assets/silver.png"},
+  {"name" : "gold", "link": "./src/assets/gold.png"},
+  {"name" : "diamond", "link": "./src/assets/diamond.png"},
+  {"name" : "emerald", "link": "./src/assets/emerald.png"},
+  {"name" : "ruby", "link": "./src/assets/ruby.png"},
+  {"name" : "pipe-head", "link": "./src/assets/pipe_head.png"},
+  {"name" : "pipe-body", "link": "./src/assets/pipe_body.png"},
+  {"name" : "shop-icon", "link": "./src/assets/shop_icon.png"},
+  {"name" : "shop-icon-selected", "link": "./src/assets/shop_icon_selected.png"},
+  {"name" : "lock", "link": "./src/assets/lock.png"}
+]
